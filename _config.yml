@@ -24,9 +24,9 @@ description: >- # this means to ignore newlines until "baseurl:"
   Welcome to Josh's Bitwise Blog, your go-to destination for all things embedded software and hardware! I’m Josh Goard, an embedded software engineer specializing in real-time software for industrial machines. 
   In this blog, I’ll dive into a range of topics from projects, best-practices, and news surrounding the embedded software industry.
 # baseurl: "" # the subpath of your site, e.g. /blog
-baseurl: "jgoard.github.io"
+baseurl: "https://jgoard.github.io/"
 url: "https://jgoard.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
-github_username:  "https://github.com/JGoard"
+github_username:  "JGoard"
 linkedin:         "https://linkedin.com/in/joshuagoard" 
 
 # Build settings

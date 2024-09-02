@@ -16,7 +16,7 @@ From further research however, I found that it is possible to completely work fr
 
 I will be showing the proper procedure for utilizing a containerized docker enviroment on a Windows 10 host, some steps will not be needed if a Linux based host is used.
 
-![A sample layout for how docker itself works with something as simple as gcc](jgoard.github.io/_posts/2024-09-02-stm32m4cortex-dev-env/docker-layout.jfif)
+![A sample layout for how docker itself works with something as simple as gcc](jgoard.github.io/_posts/2024-09-02-stm32m4cortex-dev-env/docker-layout.jpeg)
 
 # Installing for Windows Hosts
 ### WSL

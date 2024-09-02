@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Jekyll Serve",
+            "type": "shell",
+            "command": "jekyll serve",
+            "options": {
+                "statusbar": {
+                    "visible": true,
+                    "color": "#00ff22",
+                    "icon": {
+                        "id": "play"
+                    }
+                },
+                "dependsOn": "cd {workspaceFolder}/blog"
+            }
+        }
+        
+    ]
+}

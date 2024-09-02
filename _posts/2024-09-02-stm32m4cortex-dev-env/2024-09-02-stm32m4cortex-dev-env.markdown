@@ -31,7 +31,6 @@ Install [VSCode](https://code.visualstudio.com/) on your Windows host, ensure th
 ### usbipd
 [usbipd](https://github.com/dorssel/usbipd-win) is needed in order to bind usb devices to be used through WSL.
 
-
 # Creating a Dockerfile
 This part will be fairly simple and straightforward, I will be borrowing this process from one of my own projects and listing the steps needed below...
 
@@ -112,9 +111,7 @@ With your STM32 board, you must find the VID and PID combination for this device
 
 For this example, I will be using my personal STM32F303RE Development Board which utilizes ST-LINK/V2.1 onboard.
 
-{% highlight Powershell %}
-VID:PID Combinatsion -> 0483:374b // ST-LINK/V2.1 VID:PID Number
-{% endhighlight %}
+*VID:PID Combinatsion -> 0483:374b // ST-LINK/V2.1 VID:PID Number*
 
 ## Binding and Attaching USB Device to WSL
 
@@ -160,8 +157,84 @@ This should now launch a container with the appropriate permissions in order to 
 
 ## Attaching VSCode to Container
 
+Download the Dev Container extension if you haven't already for VSCode. When you reload your window, you should see your previously launched container as running in the top of the extension. 
+
+Now within your project in VSCode, create a .devcontainer folder with a .devcontainer json file. Here you can specify which VSCode extensions you would like to be present within your attached container.
+
+These are common ones that I use myself within any of my development enviroments...
+
+{% highlight json %}
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "Existing Dockerfile",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../Dockerfile"
+	},
+	"mounts": [
+	"source=vscode-extensions,target=/root/.vscode-server-insiders/extensions,type=volume"
+	],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"extensions.verifySignature": false
+			},
+			"extensions": [
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"twxs.cmake",
+				"ms-vscode.cmake-tools",
+				"marus25.cortex-debug",
+				"marus25.cortex-debug-dp-stm32f4",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"mcu-debug.memory-view",
+				"ms-vscode.makefile-tools",
+				"ms-vscode.vscode-serial-monitor",
+				"bmd.stm32-for-vscode",
+				"actboy168.tasks",
+				"webfreak.debug"
+			]
+			
+		}
+	},
+	// "runArgs": ["--privileged","-v"]
+
+	
 
 
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
 
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	// "postCreateCommand": "cat /etc/os-release",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "devcontainer"
+}
+{% endhighlight %}
+
+
+When you go to the dev containers VSCode extension, right-click on your currently running container, and attach to VSCode, a new window should come up with a remote connection to your container, and there should also be automatic git-forwarding of your project (if it's source controlled), and a VSCode extension installation as a result.
+
+At this point you will have successfully connected to your container, and now you may compile, flash, and debug all to your hearts content.
+
+It is good practice to create tasks for compiling debug or release builds, flashing those builds, and launch tasks for the openocd/gdb debugger whenever you have the time.
+
+This will prevent the anger that can typically come from repeatedly typing in your gcc commands as well.
+
+If you have any questions, please reachout via my email or github.
+
+I should be posting a sample hello-world project there at somepoint in time showcasing a simple enviroment.
+
+Josh
 
 
